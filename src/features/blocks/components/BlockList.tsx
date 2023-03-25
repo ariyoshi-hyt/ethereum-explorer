@@ -2,13 +2,13 @@ import { useBlocks } from "../api/getBlocks";
 import { Block } from "./Block";
 
 export const BlockList = () => {
-  const blocksQuery = useBlocks({});
+  const { isLoading, data } = useBlocks({});
 
-  if (blocksQuery.isLoading) {
-    return <div>...error</div>;
+  if (isLoading) {
+    return <div>...Loading</div>;
   }
 
-  if (!blocksQuery.data?.length) {
+  if (!data?.length) {
     return <div>block does not exist</div>;
   }
 
@@ -17,7 +17,7 @@ export const BlockList = () => {
       <li>
         <h1 className="text-lg">Latest Blocks</h1>
       </li>
-      {blocksQuery.data.map((block, index) => (
+      {data?.map((block, index) => (
         <li key={index} className="grid grid-cols-2">
           <Block {...block} />
         </li>

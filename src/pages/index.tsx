@@ -1,6 +1,11 @@
-import { Inter } from "next/font/google";
+import { Transactions } from "@/features/transactions";
 import { Blocks } from "@/features/blocks";
 
 export default function Home() {
-  return <Blocks />;
+  return (
+    <>
+      <Blocks />
+      <Transactions />
+    </>
+  );
 }
