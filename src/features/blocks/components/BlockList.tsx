@@ -1,5 +1,15 @@
 import { useBlocks } from "../api/getBlocks";
 import { Block } from "./Block";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  TableContainer,
+  Td,
+} from "@chakra-ui/react";
 
 export const BlockList = () => {
   const { isLoading, data } = useBlocks({});
@@ -13,15 +23,29 @@ export const BlockList = () => {
   }
 
   return (
-    <ul>
-      <li>
-        <h1 className="text-lg">Latest Blocks</h1>
-      </li>
-      {data?.map((block, index) => (
-        <li key={index} className="grid grid-cols-2">
-          <Block {...block} />
-        </li>
-      ))}
-    </ul>
+    <TableContainer>
+      <Table variant="striped" size={"md"}>
+        <Thead>
+          <Tr>
+            <Th>Latest Blocks</Th>
+          </Tr>
+          <Tr>
+            <Th>Block Number</Th>
+            <Th>Miner Address</Th>
+            <Th>Tx Counts</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {data?.slice(0, 6).map((block, index) => {
+            return <Block {...block} />;
+          })}
+        </Tbody>
+        <Tfoot>
+          <Tr>
+            <Th>View More</Th>
+          </Tr>
+        </Tfoot>
+      </Table>
+    </TableContainer>
   );
 };

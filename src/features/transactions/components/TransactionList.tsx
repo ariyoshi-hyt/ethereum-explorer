@@ -2,6 +2,15 @@ import { TransactionReceipt, TransactionResponse } from "alchemy-sdk";
 import { useEffect, useState } from "react";
 import { useTransactions } from "../api/getTransactions";
 import { Transaction } from "./Transaction";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  TableContainer,
+} from "@chakra-ui/react";
 
 export const TransactionList = () => {
   const [transactionDates, setTransactionDates] =
@@ -27,19 +36,24 @@ export const TransactionList = () => {
   }
 
   return (
-    <ul>
-      <>
-        <li>
-          <h1 className="text-lg">Latest Transactions</h1>
-        </li>
-        {transactionDates?.slice(0, 6).map((transaction, index) => {
-          return (
-            <li key={index} className="grid grid-cols-2">
-              <Transaction {...transaction} />
-            </li>
-          );
-        })}
-      </>
-    </ul>
+    <TableContainer>
+      <Table variant="striped" size={"md"}>
+        <Thead>
+          <Tr>
+            <Th>Latest Transactions</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {transactionDates?.slice(0, 6).map((transaction, index) => {
+            return <Transaction {...transaction} />;
+          })}
+        </Tbody>
+        <Tfoot>
+          <Tr>
+            <Th>View More</Th>
+          </Tr>
+        </Tfoot>
+      </Table>
+    </TableContainer>
   );
 };

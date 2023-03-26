@@ -1,5 +1,6 @@
 import { getCurrentUnixTimeStampInUtc } from "@/utils/getCurrentUnixTimeStampInUtc";
 import { Block as BlockType } from "alchemy-sdk";
+import { Tr, Td } from "@chakra-ui/react";
 
 export const Block = ({
   number,
@@ -8,17 +9,19 @@ export const Block = ({
   transactions,
 }: BlockType) => {
   return (
-    <>
-      <div>
+    <Tr>
+      <Td>
         <p className="text-sm">{number}</p>
         <p className="text-xs">
           {getCurrentUnixTimeStampInUtc() - timestamp}s ago
         </p>
-      </div>
-      <div>
+      </Td>
+      <Td>
         <p className="text-sm">miner: {miner.slice(0, 10)}...</p>
-        <p className="text-xs">{transactions.length} txns</p>
-      </div>
-    </>
+      </Td>
+      <Td>
+        <p className="text-sm">{transactions.length} txns</p>
+      </Td>
+    </Tr>
   );
 };
