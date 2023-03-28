@@ -1,6 +1,7 @@
 import { getCurrentUnixTimeStampInUtc } from "@/utils/getCurrentUnixTimeStampInUtc";
 import { Block as BlockType } from "alchemy-sdk";
 import { Tr, Td } from "@chakra-ui/react";
+import Link from "next/link";
 
 export const Block = ({
   number,
@@ -11,7 +12,9 @@ export const Block = ({
   return (
     <Tr>
       <Td>
-        <p className="text-sm">{number}</p>
+        <Link className="text-sm" href={`block/${encodeURIComponent(number)}`}>
+          {number}
+        </Link>
         <p className="text-xs">
           {getCurrentUnixTimeStampInUtc() - timestamp}s ago
         </p>
